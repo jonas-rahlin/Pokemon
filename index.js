@@ -100,9 +100,29 @@ const PokedexData = [
 ];
 
 let pokeDex = document.getElementById("pokeDex");
+let filterBtn = document.getElementById("filter");
+
+let checkboxes = document.querySelectorAll("[name = 'checkbox']");
+
+
+let checkBoxesArr = [];
+filterBtn.addEventListener("click", ()=>{
+  checkBoxesArr = [];
+  [...checkboxes].forEach((box)=>{
+    if(box.checked === true){
+      checkBoxesArr.push(box.value);
+    }
+  })
+
+  filtered = PokedexData.filter(pokemon => {
+    return(
+      (pokemon.type === checkBoxesArr[0]) || (pokemon.type === checkBoxesArr[1]) || (pokemon.type === checkBoxesArr[2]) || (pokemon.type === checkBoxesArr[3]) || (pokemon.type === checkBoxesArr[4]) || (pokemon.type === checkBoxesArr[5])
+    );
+  })
+  console.log(filtered);
+})
 
 PokedexData.forEach((pokemon) => {
-  console.log(pokemon);
   let pokemonFrame = document.createElement("div");
   pokeDex.appendChild(pokemonFrame);
   let image = document.createElement("img");
@@ -129,9 +149,3 @@ PokedexData.forEach((pokemon) => {
   pokeUlList.append(pokeWeight);
   pokeUlList.append(pokeType);
 });
-
-// let pokeDex = document.querySelector(".container");
-
-// let pokemn = document.createElement("div");
-// let image = document.createElement("img");
-// image.src =
